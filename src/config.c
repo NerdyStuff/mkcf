@@ -1,22 +1,39 @@
 #include <stdio.h>
 #include <string.h>
-#include "inc/config.h"
+#include "config.h"
 
-int getConfLine(FILE *fpConf, char string[]){
-  while(!feof(fpConf)){
-    fgets(string, MAX_LINE_LEN, fpConf);
-    if( string[0] != IGNRCHAR && string[0] != '\n' )
-      return 1;
-  }
-  return 0;
+typedef struct list_opt{
+	struct list_opt *nxt;
+	struct option *content;
+} confList;
+
+char comChar = STD_COM_CHAR;
+confList *list;
+
+void setComChar(char newComChar){
+	comChar = newComChar;
 }
 
-int getConfOption(FILE *fpConf, char option[], char ans[]){
-  //IF optionans = ans
-  char confLine[MAX_LINE_LEN];
+int readConfigFile(char *confFileName){
+	FILE *confFile = open(confFileName, "r");
+	if(!confFile){
+		printf("Could not open %s\n", confFileName);
+		return 0;
+	}
 
-  while(getConfLine(fpConf, confLine))
-    if( strstr(confLine, option) &&  strstr(confLine, ans) )
-      return 1;
-  return 0;
+	//TODO Read line
+	//TODO Check if line is not a comment
+	//TODO Divide Opt and Val
+	//TODO Create new listentry and save Opt and Val
+	//TODO Repeat
+	return 1;
+}
+
+struct option getConfigStruct(char *optName){
+	confList *searchList = list;
+	if(!searchList)
+		return 0;
+	//TODO as long as optName != searchList->content->opt
+	//TODO searchList = searchList->nxt
+	//TODO return searchList->content
 }

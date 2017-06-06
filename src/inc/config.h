@@ -1,13 +1,39 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#include <stdio.h>
+#include <string.h>
+#include "config.h"
 
-#define IGNRCHAR '#'
-#define MAX_LINE_LEN 50
-#define INCFILE "/usr/local/etc/mkcf/incfile.conf"
-#define MKCFCONF "/usr/local/etc/mkcf/mkcf.conf"
-#define CONFDELI "="
+typedef struct list_opt{
+	struct list_opt *nxt;
+	struct option *content;
+} confList;
 
-extern int getConfLine(FILE *fpConf, char string[]);
-extern int getConfOption(FILE *fpConf, char option[], char ans[]);
+char comChar = STD_COM_CHAR;
+confList *list;
 
-#endif
+void setComChar(char newComChar){
+	comChar = newComChar;
+}
+
+int readConfigFile(char *confFileName){
+	FILE *confFile = open(confFileName, "r");
+	if(!confFile){
+		printf("Could not open %s\n", confFileName);
+		return 0;
+	}
+
+	//TODO Read line
+	//TODO Check if line is not a comment
+	//TODO Divide Opt and Val
+	//TODO Create new listentry and save Opt and Val
+	//TODO Repeat
+	return 1;
+}
+
+struct option getConfigStruct(char *optName){
+	confList *searchList = list;
+	if(!searchList)
+		return 0;
+	//TODO as long as optName != searchList->content->opt
+	//TODO searchList = searchList->nxt
+	//TODO return searchList->content
+}
