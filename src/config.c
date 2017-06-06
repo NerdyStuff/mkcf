@@ -9,11 +9,19 @@ typedef struct list_opt{
 
 char comChar = STD_COM_CHAR;
 char delimiterChar = STD_DELIMITER;
-int zBufLength = STD_LINE_LENGTH;
+int bufLength = STD_LINE_LENGTH;
 confList *list;
 
 void setComChar(char newComChar){
 	comChar = newComChar;
+}
+
+void setDelimiterChar(char newDelimiterChar){
+	delimiterChar = pDelimiterChar;
+}
+
+void setBufLength(int newBufLength){
+	bufLength = newBufLength;
 }
 
 int readConfigFile(char *confFileName){
@@ -28,7 +36,7 @@ int readConfigFile(char *confFileName){
 
 	while(!feof(confFile))
 	{
-		fgets(lBuffer, zBufLength, *confFile);
+		fgets(lBuffer, bufLength, *confFile);
 		
 		if(lBuffer[0] == comChar)
 		{
