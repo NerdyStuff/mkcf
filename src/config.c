@@ -7,7 +7,12 @@ typedef struct list_opt{
 	struct option *content;
 } confList;
 
+confList *zOptList;
+zOptList = malloc(sizeof(confList));
+zOptList -> nxt = NULL;
+
 char comChar = STD_COM_CHAR;
+int zBufLength = STD_LINE_LENGTH;
 confList *list;
 
 void setComChar(char newComChar){
@@ -15,14 +20,26 @@ void setComChar(char newComChar){
 }
 
 int readConfigFile(char *confFileName){
+	char lBuffer[100];
+
 	FILE *confFile = open(confFileName, "r");
 	if(!confFile){
 		printf("Could not open %s\n", confFileName);
 		return 0;
 	}
 
-	//TODO Read line
-	//TODO Check if line is not a comment
+	while(!feof(confFile))
+	{
+		fgets(lBuffer, zBufLength, *confFile);
+		
+		if(lBuffer[0] == comChar)
+		{
+			continue;
+		}
+		
+		
+	}
+
 	//TODO Divide Opt and Val
 	//TODO Create new listentry and save Opt and Val
 	//TODO Repeat
