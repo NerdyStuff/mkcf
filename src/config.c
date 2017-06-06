@@ -8,6 +8,8 @@ typedef struct list_opt{
 } confList;
 
 char comChar = STD_COM_CHAR;
+char delimiterChar = STD_DELIMITER;
+int zBufLength = STD_LINE_LENGTH;
 confList *list;
 
 void setComChar(char newComChar){
@@ -15,17 +17,30 @@ void setComChar(char newComChar){
 }
 
 int readConfigFile(char *confFileName){
+	//TODO Create new listentry
+	char lBuffer[100];
+
 	FILE *confFile = open(confFileName, "r");
 	if(!confFile){
 		printf("Could not open %s\n", confFileName);
 		return 0;
 	}
 
-	//TODO Read line
-	//TODO Check if line is not a comment
-	//TODO Divide Opt and Val
-	//TODO Create new listentry and save Opt and Val
-	//TODO Repeat
+	while(!feof(confFile))
+	{
+		fgets(lBuffer, zBufLength, *confFile);
+		
+		if(lBuffer[0] == comChar)
+		{
+			continue;
+		}
+		
+		char lTok[50] = strtok(lBuffer, delimiterChar);
+
+		//TODO Put in List
+
+		lTok = strtok(NULL, delimiterChar);
+	}
 	return 1;
 }
 
