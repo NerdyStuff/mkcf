@@ -17,7 +17,7 @@ void setComChar(char newComChar){
 }
 
 void setDelimiterChar(char newDelimiterChar){
-	delimiterChar = pDelimiterChar;
+	delimiterChar = newDelimiterChar;
 }
 
 void setBufLength(int newBufLength){
