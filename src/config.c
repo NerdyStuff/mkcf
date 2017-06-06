@@ -7,10 +7,6 @@ typedef struct list_opt{
 	struct option *content;
 } confList;
 
-confList *zOptList;
-zOptList = malloc(sizeof(confList));
-zOptList -> nxt = NULL;
-
 char comChar = STD_COM_CHAR;
 int zBufLength = STD_LINE_LENGTH;
 confList *list;
